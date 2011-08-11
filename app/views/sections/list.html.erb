@@ -1,0 +1,32 @@
+<%  @page_title = "Section List" %>		
+
+<div class="sections list">
+	<h2>Sections</h2>
+	
+	<%= link_to("Add New Section", {:action => 'new'}, :class => 'action new') %>
+	
+        <div><%= pluralize(@sections.size, 'section')  %> found </div>
+        
+        <table class="listing" summary="section list">
+		<tr class="header">
+			<th>&nbsp;</th>
+			<th>Section</th>
+			<th>Visible</th>
+			<th>Edits</th>
+			<th>Actions</th>
+		</tr>
+		<% @sections.each do |section| %>
+                <tr class="<%= cycle('odd','even') %>">
+			<td><%= section.position %></td>
+			<td><%= section.name %></td>
+			<td class="center"><%= status_tag(section.visible) %></td>
+			<td class="center"><%= section.section_edits.size %></td>
+			<td class="actions">
+				<%= link_to("Show", {:action => 'show', :id => section.id}, :class => 'action show') %>
+				<%= link_to("Edit", {:action => 'edit', :id => section.id}, :class => 'action edit') %>
+				<%= link_to("Delete",{:action => 'delete', :id => section.id}, :class => 'action delete') %> 
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>			

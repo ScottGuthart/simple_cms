@@ -1,0 +1,58 @@
+<%
+text = "This is a long text example for http://lynda.com. It includes line
+breaks\n and double-line breaks.\n\n It rambles on and on.\n\n You
+can't email me at dont@email.com.".html_safe
+%>
+
+<h2>word_wrap</h2>
+<%= 
+#inserts line break every 30 chars
+word_wrap(text, :line_width => 30)
+%>
+<hr />
+
+<h2>simple_format</h2>
+<%= 
+#converts \n into <br> and \n\n into <p>
+simple_format(text) 
+%>
+<hr />
+
+<h2>simple_format + word_wrap</h2>
+<%= 
+#does both
+simple_format(word_wrap(text, :line_width => 30)) 
+%>
+<hr />
+
+<h2>truncate</h2>
+<%= 
+#truncates text, appends ... (by default)
+truncate(text, :length => 40, :omission => "...") 
+%>
+<hr />
+
+<h2>excerpt</h2>
+<%= 
+#finds includes displays 7 chars before/after with ...
+excerpt(text, 'includes', :radius => 7, :omission => "...")
+%>
+<hr />
+
+<h2>highlight</h2>
+<%= 
+# wraps text in highlight tags
+highlight(text, 'text example')
+%>
+<hr />
+<%= 
+#uses multiple words with a custom highlighter \1 is first item.
+highlight(text, ['example','rambles'], :highlighter => '<em>\1</em>')
+%>
+
+<h2>auto_link</h2>
+<%= 
+#finds includes displays 7 chars before/after with ...
+auto_link(text)
+%>
+<hr />
